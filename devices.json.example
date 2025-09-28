@@ -1,0 +1,57 @@
+[
+  {
+    "comment": "you can write anything here",
+    "address": "E21580000000",
+    "key": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "encryption": true,
+    "rpa": true,
+    "actions": [
+      {
+        "trigger": {
+          "name": "press",
+          "keys": [
+            "A0"
+          ]
+        },
+        "action": "light_toggle"
+      },
+      {
+        "trigger": {
+          "name": "release",
+          "keys": [
+            "A1"
+          ]
+        },
+        "action": "light_off"
+      },
+      {
+        "trigger": {
+          "name": "long_press",
+          "duration": 5,
+          "keys": [
+            "B0"
+          ]
+        },
+        "action": "light_on"
+      },
+      {
+        "trigger": {
+          "name": "long_press",
+          "duration": 10,
+          "keys": [
+            "A0",
+            "B1"
+          ]
+        },
+        "action": "ota"
+      },
+      {
+        "trigger": {
+          "name": "raw",
+          "value": "4F54414F4E"
+        },
+        "action": "light_off"
+      }
+    ]
+  },
+]

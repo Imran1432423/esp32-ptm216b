@@ -1,0 +1,6 @@
+devices*.json
+*~
+*.pyc
+build
+*.der
+*.private

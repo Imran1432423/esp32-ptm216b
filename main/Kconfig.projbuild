@@ -1,0 +1,88 @@
+menu "ESP32-PTM216B"
+
+    config PTM216B_DEVICES_FILE
+        string "Name of json file with devices"
+        default "devices.json"
+        help
+            The file must be in ptm216b source dir.
+            It should be formatted as shown in devices.json.example.
+            Git ignores any file named devices*.json.
+
+    config PTM216B_LED_ON
+        bool "Turn LED on at boot"
+        default y
+        help
+            If set the MINIR4 LED will be turned on and it will remain on.
+            Turn it off if you find the light annoying.
+
+    choice PTM216B_S_MODE
+        prompt "Select the type of switch connected to the device"
+        default PTM216B_S_MODE_BISTABLE
+        help
+            Specify whether the switch(es)/button(s) connected between S1 and S2
+            is (are) monostable or bistable.
+        config PTM216B_S_MODE_MONOSTABLE
+            bool "Monostable (e.g. push button)"
+
+        config PTM216B_S_MODE_BISTABLE
+            bool "Bistable (e.g. rocker light switch)"
+    endchoice
+
+    config PTM216B_OTA
+        bool "Enable BLE OTA updates"
+        default n
+        select BOOTLOADER_APP_ROLLBACK_ENABLE
+        help
+            Enable OTA updates.
+            More info can be found in the project README.md file.
+
+    config PTM216B_OTA_PASSWORD
+        string "OTA password"
+        default ""
+        depends on PTM216B_OTA
+        help
+            The password to be used to send OTA updates.
+
+    config PTM216B_OTA_ON_INTERNAL_BUTTON
+        bool "Start OTA with internal button"
+        default n
+        depends on PTM216B_OTA
+        help
+            If enabled, it will be possible to enter OTA mode pressing the
+            MINIR4 button for 10 seconds.
+
+    menu "Advanced options"
+        config PTM216B_RELAY_GPIO
+            int "Relay GPIO"
+            default 26
+            help
+                You should not change this, unless you intend to use this firmware
+                on something other than the MINIR4.
+
+        config PTM216B_LED_GPIO
+            int "LED GPIO"
+            default 19
+            help
+                You should not change this, unless you intend to use this firmware
+                on something other than the MINIR4.
+
+        config PTM216B_INT_BUTTON_GPIO
+            int "Internal button GPIO"
+            default 0
+            help
+                You should not change this, unless you intend to use this firmware
+                on something other than the MINIR4.
+
+        config PTM216B_S2_GPIO
+            int "External S2 GPIO"
+            default 27
+            help
+                You should not change this, unless you intend to use this firmware
+                on something other than the MINIR4.
+
+        config PTM216B_GPIO_DEBOUNCE
+            int "GPIO debouncing delay in milliseconds"
+            default 10
+    endmenu
+
+endmenu
