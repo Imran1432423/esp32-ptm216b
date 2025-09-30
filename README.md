@@ -616,6 +616,7 @@ TODO
 This is a list of things that I would like to do in random order:
 
 * CI with linters and tests for both the C++ and the Python code
+* Move the ptm216b code to a dedicated and re-usable esp32 component
 * Automated tests to run using 2 ESP32 devkits
 * Add more config options to `nfc.py`. To do so I could:
     * Ask for more info about the NFC API from Enocean (they helped me once already)
@@ -629,6 +630,9 @@ This is a list of things that I would like to do in random order:
 * Properly distribute the various Python tools in `tools/` via PyPI.
 * OTA updates with AES-GCM encrypted FW
 * OTA device selection when multiple devices are in OTA mode at the same time
+* Easier way to update the config without updating the whole FW
+* "Fleet management system" over WiFi to distribute FW upgrades and configs.
+* MQTT bridge over WiFi
 
 
 Credits
