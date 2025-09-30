@@ -28,6 +28,13 @@ menu "ESP32-PTM216B"
             bool "Bistable (e.g. rocker light switch)"
     endchoice
 
+    config PTM216B_BRUTEFORCE_MITIGATION
+        bool "Enable bruteforce mitigation"
+        default y
+        help
+            For more info see the "Bruteforce protection" section
+            of the project README.
+
     config PTM216B_OTA
         bool "Enable BLE OTA updates"
         default n

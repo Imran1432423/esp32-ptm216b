@@ -37,6 +37,7 @@
 #include <mbedtls/base64.h>
 #include <mbedtls/ccm.h>
 
+#include "constants.hpp"
 #include "ptm216b_devices.hpp"
 #include "ptm216b_types.hpp"
 
@@ -360,6 +361,8 @@ class ptm216b
 
     bool is_banned(const device &d, const bool short_ban)
     {
+        if (!config::bruteforce_mitigation_enabled)
+            return false;
         static const constexpr int64_t s_to_us = 1000000;
         static const constexpr int64_t short_timeout = s_to_us * 2;
         static const constexpr int64_t long_timeout = s_to_us * 60 * 60 * 6;
@@ -378,6 +381,8 @@ class ptm216b
 
     void ban_device(const device &d)
     {
+        if (!config::bruteforce_mitigation_enabled)
+            return;
         const auto time = esp_timer_get_time();
         ban_list.emplace(d.address, time);
     }

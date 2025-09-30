@@ -65,6 +65,12 @@
 #define PTM216B_LED_STATUS 1
 #endif
 
+#ifdef CONFIG_PTM216B_BRUTEFORCE_MITIGATION
+#define PTM216B_BRUTEFORCE_MITIGATION true
+#else
+#define PTM216B_BRUTEFORCE_MITIGATION false
+#endif
+
 namespace config {
 static const constexpr gpio_num_t relay_gpio = static_cast<gpio_num_t>(PTM216B_RELAY_GPIO);
 static const constexpr gpio_num_t led_gpio = static_cast<gpio_num_t>(PTM216B_LED_GPIO);
@@ -76,4 +82,5 @@ static const constexpr bool ota_enable = PTM216B_OTA;
 static const constexpr int gpio_debounce_delay = PTM216B_GPIO_DEBOUNCE;
 static const constexpr bool ota_on_internal_button = PTM216B_OTA_ON_INTERNAL_BUTTON;
 static const constexpr uint32_t led_status = PTM216B_LED_STATUS;
+static const constexpr bool bruteforce_mitigation_enabled = PTM216B_BRUTEFORCE_MITIGATION;
 };
