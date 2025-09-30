@@ -412,9 +412,9 @@ incremented with every action. The FW [will ignore](#counter)
 messages with old counter values.
 
 By default the button status information is sent in plaintext, but it's possible
-to enable encryption via [NFC](#nfc-configuration-of-ptm216b).
-It should also be possible to change the encryption key, but I haven't figured
-that out yet.
+to enable encryption via [NFC](#nfc-configuration-of-ptm216b) and change
+the key.
+
 
 It's also possible to enable BLE's
 [resolvable private addresses](https://www.bluetooth.com/blog/enhancing-device-privacy-and-energy-efficiency-with-bluetooth-randomized-rpa-updates/),
@@ -617,7 +617,6 @@ This is a list of things that I would like to do in random order:
 
 * CI with linters and tests for both the C++ and the Python code
 * Automated tests to run using 2 ESP32 devkits
-* Add to `nfc.py` a way to change the encryption key and reset the CTR
 * Add more config options to `nfc.py`. To do so I could:
     * Ask for more info about the NFC API from Enocean (they helped me once already)
     * Use the official Windows program and sniff the USB packets to see what it does

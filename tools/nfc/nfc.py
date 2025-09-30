@@ -6,6 +6,7 @@
 
 import argparse
 import binascii
+import os
 import sys
 import time
 
@@ -147,6 +148,7 @@ class NFC:
     def get_info(self):
         r = {'encryption': False,
              'rpa': False,
+             'key_hidden': False,
              'ctr':0,
              'key':b'',
              'addr':b''}
@@ -155,6 +157,8 @@ class NFC:
             r['encryption'] = True
         if (config[0] & 0x10) != 0:
             r['rpa'] = True
+        if (config[0] & 0x08) != 0:
+            r['key_hidden'] = True
         ctr = next(self.read_pages(0xd))
         r['ctr'] = int.from_bytes(ctr, 'big')
         r['addr'] = b'\xE2\x15'
@@ -166,28 +170,39 @@ class NFC:
         r['key'] = ''.join(binascii.hexlify(bytes(x)).decode().upper() for x in self.read_pages(0x14))
         return r
 
-    def set_flags(self, encryption=False, rpa=False):
+    def set_flags(self, encryption=None, rpa=None, custom_key=None, hide_key=None):
         current = next(self.read_pages(0xe))
         new_value = current[:]
-        if encryption:
-            new_value[2] |= 0x20
-        else:
-            new_value[2] &= 0xdf
-        if rpa:
-            new_value[0] |= 0x10
-        else:
-            new_value[0] &= 0xef
+        if encryption is not None:
+            if encryption:
+                new_value[2] |= 0x20
+            else:
+                new_value[2] &= 0xdf
+        if rpa is not None:
+            if rpa:
+                new_value[0] |= 0x10
+            else:
+                new_value[0] &= 0xef
+        if custom_key is not None:
+            if custom_key:
+                new_value[0] |= 0x04
+            else:
+                new_value[0] &= 0xfb
+        if hide_key is not None:
+            if hide_key:
+                new_value[0] |= 0x08
+            else:
+                new_value[0] &= 0xf7
         if new_value != current:
             self.write_page(0xe, new_value)
 
-    # NOTE: overwriting the key via NFC does not change the key
-    #       used by the device
-    # def new_key(self):
-    #     key = os.urandom(16)
-    #     key = chunks(key, 4)
-    #     for page, data in enumerate(key, start=0x14):
-    #         self.write_page(page, list(data))
-    #     self.write_page(0xd, [0, 0, 0, 1])
+    def new_key(self):
+        key_o = os.urandom(16)
+        key = chunks(key_o, 4)
+        for page, data in enumerate(key, start=0x14):
+            self.write_page(page, list(data))
+        self.set_flags(custom_key=True)
+        print("New key: " + binascii.hexlify(key_o).decode().upper())
 
     def set_password(self, password):
         assert len(password) == 4
@@ -203,9 +218,10 @@ def get_args():
                              'PIN codes set via Enocean\'s app')
     subparsers = parser.add_subparsers(dest='cmd', required=True)
     subparsers.add_parser('dump', help='read and print current values')
+    subparsers.add_parser('cycle-key', help='change they key to a new random one')
     subparsers.add_parser('raw-dump', help='dump the entire memory')
-    subparsers.add_parser('set-high-security', help='enable encryption and RPA')
-    subparsers.add_parser('set-low-security', help='disable encryption and RPA')
+    subparsers.add_parser('set-high-security', help='enable encryption, RPA, and makes the key unreadable.')
+    subparsers.add_parser('set-low-security', help='disable encryption, RPA, and makes the key readable.')
     sp = subparsers.add_parser('set-password', help='Change the NFC password. Be aware that '
                                                     'this is not compatible with Enocean\'s own '
                                                     'app. They use a proprietary encoding '
@@ -240,16 +256,19 @@ if __name__ == '__main__':
             info = nfc.get_info()
             print(f"""Address:\t{info['addr']}
 Key:\t\t{info['key']}
+Key hidden:\t{info['key_hidden']}
 Counter:\t{info['ctr']}
 Encryption:\t{info['encryption']}
 RPA:\t\t{info['rpa']}""")
         elif args.cmd == 'raw-dump':
             nfc.full_dump()
+        elif args.cmd == 'cycle-key':
+            nfc.new_key()
         elif args.cmd == 'set-high-security':
-            nfc.set_flags(encryption=True, rpa=True)
+            nfc.set_flags(encryption=True, rpa=True, hide_key=True)
             print('Security config updated')
         elif args.cmd == 'set-low-security':
-            nfc.set_flags(encryption=False, rpa=False)
+            nfc.set_flags(encryption=False, rpa=False, hide_key=False)
             print('Security config updated')
         elif args.cmd == 'set-password':
             new_password = list(binascii.unhexlify(args.new_password))
