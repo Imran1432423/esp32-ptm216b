@@ -364,8 +364,11 @@ class ptm216b
         if (!config::bruteforce_mitigation_enabled)
             return false;
         static const constexpr int64_t s_to_us = 1000000;
-        static const constexpr int64_t short_timeout = s_to_us * 2;
-        static const constexpr int64_t long_timeout = s_to_us * 60 * 60 * 6;
+        static const constexpr int64_t ms_to_us = 1000;
+        static const constexpr int64_t h_to_s = 60 * 60;
+        static const constexpr int64_t h_to_us = h_to_s * s_to_us;
+        static const constexpr int64_t short_timeout = 100 * ms_to_us;
+        static const constexpr int64_t long_timeout = 6 * h_to_us;
         auto ban_el = ban_list.find(d.address);
         if (ban_el != ban_list.end()) {
             const auto timeout =
