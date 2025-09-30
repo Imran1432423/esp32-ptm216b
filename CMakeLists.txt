@@ -2,4 +2,4 @@ cmake_minimum_required(VERSION 3.16)
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 idf_build_set_property(MINIMAL_BUILD ON)
 
-project(esp32-ptm216b VERSION 0.0.1)
+project(esp32-ptm216b VERSION 1.0.0)
