@@ -17,15 +17,6 @@ namespace buttons {
 
 static const constexpr char *log_tag = "buttons";
 
-class buttons_error : public std::runtime_error
-{
-  public:
-    buttons_error(const char *s)
-            : std::runtime_error(s)
-    {
-    }
-};
-
 enum class button_id : uint32_t
 {
     internal = 0x1,
